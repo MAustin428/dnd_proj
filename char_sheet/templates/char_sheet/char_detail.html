@@ -1,0 +1,17 @@
+<h1>{{ charakter.char_name }}</h1>
+<li><a href="{% url 'char_sheet:index' %}">Return to Main Page</a></li>
+
+
+{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+
+<form method="post">
+{% csrf_token %}
+	<div>
+		<label for="klasse">Class</label>
+		<input type="text" id="klasse" name="klasse">
+		<label for="niveau">Level</label>
+		<input type="text" id="niveau" name="niveau">
+		<label for="herkunft">Background</label>
+		<input type="text" id="herkunft" name="herkunft">
+	</div>
+</form>
