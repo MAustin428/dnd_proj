@@ -1,22 +1,32 @@
-<h1>{{ player.player_name }}</h1>
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Index</title>
+</head>
+<body>
+	<h1>{{ player.player_name }}</h1>
 
-{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+	{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
 
-{% if charakter_list %}
-<ul>
-{% for charakter in player.charakter_set.all %}
-	<li>{{ charakter.char_name }}</li>
-{% endfor %}
-</ul>
-{% endif %}
+	{% if charakter_list %}
+	<ul>
+	{% for charakter in player.charakter_set.all %}
+		<li>{{ charakter.char_name }}</li>
+	{% endfor %}
+	</ul>
+	{% endif %}
 
-<form action="{% url 'char_sheet:char_detail' player.id %}" method="post">
-	{% csrf_token %}
-	<label for="char_name">Character Name</label>
-	<input type="text" name="char_name" id="char_name" placeholder="Enter Chacter Name">
-	<label for="klasse">Class</label>
-	<input type="text" name="klasse" id="klasse" placeholder="Enter Chacter Class">
-	<label for="rasse">Race</label>
-	<input type="text" name="rasse" id="rasse" placeholder="Enter Chacter Race">
-	<input type="submit" value="New Character">
-</form>
+	<form action="{% url 'char_sheet:char_detail' player.id %}" method="post">
+		{% csrf_token %}
+		<label for="char_name">Character Name</label>
+		<input type="text" name="char_name" id="char_name" placeholder="Enter Chacter Name">
+		<label for="klasse">Class</label>
+		<input type="text" name="klasse" id="klasse" placeholder="Enter Chacter Class">
+		<label for="rasse">Race</label>
+		<input type="text" name="rasse" id="rasse" placeholder="Enter Chacter Race">
+		<input type="submit" value="New Character">
+	</form>
+
+</body>
+</html>

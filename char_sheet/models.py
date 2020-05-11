@@ -30,6 +30,7 @@ class Charakter(models.Model):
 
 	class Race_Choices(models.TextChoices):
 		DWARF = 'DWARF', _('Dwarf')
+		ELF = 'ELF', _('Elf')
 		HALFLING = 'HALFLING', _('Halfling')
 		HUMAN = 'HUMAN', _('Human')
 		DRAGONBORN = 'DRAGONBORN', _('Dragonborn')

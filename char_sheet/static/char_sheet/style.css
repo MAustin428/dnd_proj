@@ -1,0 +1,76 @@
+body {
+	color: #000000;
+	font-family: Geneva, sans-serif;
+}
+
+.pc_list {
+	padding-left: 0;
+}
+
+.pc_list a {
+	text-decoration: none;
+	color: #000000;
+}
+
+.pc_list a:hover {
+	text-decoration: underline;
+}
+
+#pl_list {
+	list-style-type: none;
+	font-size: 24px;
+	font-weight: 600;
+	padding-bottom: 2px;
+}
+
+#pl_list a {
+	margin-left: 16px;
+}
+
+#ch_list {
+	list-style-type: none;
+	display: inline-block;
+	font-size: 20px;
+	font-weight: 400;
+}
+
+#ch_list a {
+	margin-left: 160px;
+	margin-right: 4px;
+}
+
+.ch_expanded {
+	font-size: 14px;
+	font-weight: 300;
+	display: inline-block;
+}
+
+#pl_visible {
+	margin-top: 48px;
+	margin-bottom: 8px;
+}
+
+.action_button {
+	background-color: white;
+	border: none;
+	border-bottom: 3px solid black;
+	border-right: 3px solid black;
+	border-bottom-right-radius: 10px;
+	padding-bottom: 4px;
+	padding-right: 6px;
+	text-decoration: none;
+	vertical-align: top;
+}
+
+#player_div {
+	display: none;
+	font-size: 16px;
+	font-weight: 300;
+}
+
+#char_div {
+	display: none;
+	font-size: 16px;
+	font-weight: 300;
+	padding-top: 8px;
+}

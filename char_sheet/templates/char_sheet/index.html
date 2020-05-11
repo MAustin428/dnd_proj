@@ -1,29 +1,83 @@
-<h1>Players</h1>
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'char_sheet/style.css' %}"/>
 
-{% if player_list %}
-	<ul>
-	{% for player in player_list %}
-		<li><a href="{% url 'char_sheet:detail' player.id %}">{{ player.player_name }}</a></li>
-		<div>
-		<ul>
-		{% for charakter in charakter_list %}
-			{% if charakter.player == player %}
-				<li><a href="{% url 'char_sheet:char_detail' player.id %}">{{ charakter.char_name }}</a></li>
-			{% endif %}
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Index</title>
+</head>
+<body>
+<script>
+	function set_pl_div_vis() {
+		p_div = document.getElementById("player_div");
+		if (p_div.style.display == "block")
+			p_div.style.display = "none";
+		else
+			p_div.style.display = "block";
+			document.getElementById("player_name").focus();
+	}
+
+	function set_ch_div_vis() {
+		ch_div = document.getElementById("char_div");
+		if (ch_div.style.display == "block")
+			ch_div.style.display = "none";
+		else
+			ch_div.style.display = "block";
+			document.getElementById("char_name").focus();
+	}
+</script>
+
+	<h1>Players</h1>
+
+	{% if player_list %}
+		<ul class="pc_list" id="pl_list">
+		{% for player in player_list %}
+			<div>
+			<li>
+				<button class=action_button onclick="set_ch_div_vis()">New Character</button>
+				<a href="{% url 'char_sheet:char_detail' player.id %}">{{ player.player_name }}</a>
+			</li>
+			</div>
+			<div id="char_div">
+					<form action="{% url 'char_sheet:char_detail' player.id %}" method="post">
+						{% csrf_token %}
+						<label for="char_name">Character Name</label>
+						<input type="text" name="char_name" id="char_name" placeholder="Enter Chacter Name" required>
+						<label for="klasse">Class</label>
+						<input type="text" name="klasse" id="klasse" placeholder="Enter Chacter Class" required>
+						<label for="rasse">Race</label>
+						<input type="text" name="rasse" id="rasse" placeholder="Enter Chacter Race" required>
+						<input class="action_button" type="submit" value="Submit">
+					</form>
+			</div>
+			<div>
+			<ul class="pc_list" id="ch_list">
+			{% for charakter in charakter_list %}
+				{% if charakter.player == player %}
+					<div>
+					<li><a href="{% url 'char_sheet:char_detail' player.id %}">{{ charakter.char_name }}</a>
+					<p class="ch_expanded">Lvl {{ charakter.niveau }} {{ charakter.rasse }} {{charakter.klasse }}</p></li>
+					</div>
+				{% endif %}
+			{% endfor %}
+			</ul>
+			</div>
 		{% endfor %}
 		</ul>
-		</div>
-	{% endfor %}
-	</ul>
-{% else %}
-	<p>No players have been created</p>
-{% endif %}
+	{% else %}
+		<p>No players have been created</p>
+	{% endif %}
 
-<div>
-	<form method="post">
-		{% csrf_token %}
-		<input type="text" name="player_name" placeholder="Enter player name">
-		<label for="player_name">Player Name:</label>
-		<input type="submit" value="New Player">
-	</form>
-</div>
+	<button class="action_button" id="pl_visible" onclick="set_pl_div_vis()">New Player</button>
+	<div id="player_div">
+		<form method="post">
+			{% csrf_token %}
+			<label for="player_name">Player Name:</label>
+			<input type="text" name="player_name" id="player_name" placeholder="Enter player name" required>
+			<input class="action_button" type="submit" value="Submit">
+		</form>
+	</div>
+
+</body>
+</html>
